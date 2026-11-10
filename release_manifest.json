@@ -1,0 +1,275 @@
+{
+  "版本": "1.0",
+  "模型": "simscDNAm",
+  "分支": "main",
+  "文件数": 65,
+  "文件": {
+    ".gitignore": {
+      "字节数": 316,
+      "SHA256": "f6c9559fea3c593a79960ea82271f84324394996d75f23139399875fcf66e4a6"
+    },
+    "baseline/FittedMarginal.ipynb": {
+      "字节数": 22217,
+      "SHA256": "3edec20e1ea8588f2070ec1547dd2c70b7e8f2078c1fd8b411de7104a5e3d6f8"
+    },
+    "baseline/README.md": {
+      "字节数": 4559,
+      "SHA256": "a1d808a37c9af7843ec7310cbd1a9586372e3586ac866af7d5856960e28f6a8c"
+    },
+    "baseline/simATAC.ipynb": {
+      "字节数": 34320,
+      "SHA256": "ea2528ed8d299eb91d79fcd76af8acd8d863a7586e5f1a1c9018453693d660c1"
+    },
+    "baseline/simCAS.ipynb": {
+      "字节数": 24403,
+      "SHA256": "982b957058d8c48a04dc3325d0d698a11811e2394ea24c91980836eed8b58e0f"
+    },
+    "baseline/test_notebooks.py": {
+      "字节数": 3524,
+      "SHA256": "68d6beba0c46a814d3dbfecbf985103a6d21b3ec6c28a3cdf5b6f6f3e7e00486"
+    },
+    "evaluate/__init__.py": {
+      "字节数": 60,
+      "SHA256": "6c24ad1db7291ee60014bd5db263cce913ea133b9a74606bc90fcdb4be2f3778"
+    },
+    "evaluate/a1_marker_regions_liu2023.csv": {
+      "字节数": 1419,
+      "SHA256": "80c5d77b7306a3a64c12600950e0273d1bf7cc808049e3995a80c88c063f659c"
+    },
+    "evaluate/A1A2A3.ipynb": {
+      "字节数": 44497,
+      "SHA256": "65a0d9a395d7d682063eefbd5b65f9f43780046c9fbf54390100bf68ba2e6490"
+    },
+    "evaluate/config.yaml": {
+      "字节数": 1440,
+      "SHA256": "17097bd31a7ebb8fe1fe6602127b48f115134004ef78e7463cfbd9c082cc66d4"
+    },
+    "evaluate/metrics.py": {
+      "字节数": 7392,
+      "SHA256": "e78c00dec22426d3a1b61beeccc31bba2dba3c4cec78b31fc8ea0732871c083a"
+    },
+    "evaluate/preprocessing.py": {
+      "字节数": 8456,
+      "SHA256": "dd50309b61aac68429629c0854c1959f961999ef97883422fea3f0dee409f898"
+    },
+    "evaluate/README.md": {
+      "字节数": 11904,
+      "SHA256": "ceffbad3de1655051a1119ffc42a6dc6368b8ebd2d419bf25dce15bf1a313c7c"
+    },
+    "evaluate/requirements.txt": {
+      "字节数": 139,
+      "SHA256": "bed67d41aec5e9a4723e15134487c2a2dcec6bd3d78a9bea5c7f8e72daf533b0"
+    },
+    "evaluate/test_evaluation.py": {
+      "字节数": 7617,
+      "SHA256": "0bf20d29a86efad4680906b9eda8ecc6d2dc057c24f05f522b79a62c6859f3c8"
+    },
+    "evaluate/test_notebook.py": {
+      "字节数": 8429,
+      "SHA256": "15488f7e8028cbaccc2948f3bf9e0707dd1f9437af1a9476d0ffccd8783d2f03"
+    },
+    "evaluate/test_plotting.py": {
+      "字节数": 5653,
+      "SHA256": "d3b25c9e8003a640feeb8c1b9b6147b3f72ecda358a9aae1f957698616fe768a"
+    },
+    "Readme.md": {
+      "字节数": 4187,
+      "SHA256": "41b3d83d3fb1317704bcdd82cba8e1fb3023af226bbcca4288a03776dabcd443"
+    },
+    "requirements.txt": {
+      "字节数": 167,
+      "SHA256": "cbdf37a1f367479fed1926c577dba909b490d9953e73d7a42323b3e6bf422996"
+    },
+    "results/liu2023/A1_A2_A3_summary.csv": {
+      "字节数": 723,
+      "SHA256": "ee7a292b82eb5d533445171e5c8c215953bceb92d99d26803511ee4c10bde110"
+    },
+    "results/liu2023/A1_plot_histograms.csv": {
+      "字节数": 55633,
+      "SHA256": "346448f9894189c742112cc4fd4d12f85b210a8db29efb8bd1684263dc27aaf4"
+    },
+    "results/liu2023/A1_plot_regions.csv": {
+      "字节数": 1460,
+      "SHA256": "c980d41e2bc39298589ce1a340ac1a7c5b5075bd7f4434de84ac8a3e524f5c52"
+    },
+    "results/liu2023/A1_summary.csv": {
+      "字节数": 426,
+      "SHA256": "5e72ea8773726e8e06d09814775b209fd5ea2b6a131ff4cf1421a3b3414a54b5"
+    },
+    "results/liu2023/A1_type_details.csv": {
+      "字节数": 21921,
+      "SHA256": "9013870a79240e4558f25fb96b8b5e4d5990006b878ad65a316669230bdd8070"
+    },
+    "results/liu2023/A1_type_histograms.csv": {
+      "字节数": 72328,
+      "SHA256": "592582944a4dc897dfa36eeb3f740d961dfdbe0408716345ff1967cc39e323ca"
+    },
+    "results/liu2023/A2_duplicate_correlations.csv": {
+      "字节数": 549790,
+      "SHA256": "7eba52161ff261fed615392d392172a2d44ff32e761f9c6e400c5bfb0cf077e5"
+    },
+    "results/liu2023/A2_natural_Spearman_summary.csv": {
+      "字节数": 568,
+      "SHA256": "0ec70924fe4e19055e7fd7203e4634e6eb35caa4dea6e262bb69ab373cf4e75e"
+    },
+    "results/liu2023/A2_pearson_summary.csv": {
+      "字节数": 375,
+      "SHA256": "620d4cd94d2c9d6aa6b2f6a6978d1130526d354695b0c3a3acd99fb0929d1ac8"
+    },
+    "results/liu2023/A3_joint_coordinates.csv": {
+      "字节数": 534474,
+      "SHA256": "263cb184c84603efb2156fe402615f272bf2371f692114e904d2cb9d55b91c7f"
+    },
+    "results/liu2023/A3_miLISI.csv": {
+      "字节数": 214,
+      "SHA256": "0aa2f2fe11610d873fa276448ee727fdd6523f1759f37557c3c0d42a24e7ee72"
+    },
+    "results/liu2023/A3_miLISI_cells.csv": {
+      "字节数": 562282,
+      "SHA256": "913f4e7b0ce8b76503c593480e90db03a4137243eaf2c138466aa112092bc8e1"
+    },
+    "results/liu2023/A3_type_details.csv": {
+      "字节数": 5014,
+      "SHA256": "3f5487ee532898469766ea3fde111d4cd64449af7f8b6bee6ff3192572f8012f"
+    },
+    "results/liu2023/alignment_summary.json": {
+      "字节数": 1744,
+      "SHA256": "750bf245c89e61d3835de0b1d6d7c9c248ce2f485a4a3a431eb3f135db9eb99e"
+    },
+    "results/liu2023/cleanup.json": {
+      "字节数": 236,
+      "SHA256": "301bee9bf4ebb99bb45ba385642e4f1bbf554b9f70ee6410658c688ff88a9954"
+    },
+    "results/liu2023/config.yaml": {
+      "字节数": 1241,
+      "SHA256": "a7bfc1294bf5d302441b311f306a2d6e74615c0823e1beec11d41f9235b1132e"
+    },
+    "results/liu2023/environment.json": {
+      "字节数": 506,
+      "SHA256": "3c06c3712e411877a2ef688e855a43047194f3826c611b3bfe68a2f3484ed1a1"
+    },
+    "results/liu2023/figures/A1_marginal_regions.pdf": {
+      "字节数": 35024,
+      "SHA256": "f2051e51f2ebba14497e141ed7d8ff39d4b5fa0b32f0724bb8151dc87865ea7a"
+    },
+    "results/liu2023/figures/A1_marginal_regions.png": {
+      "字节数": 325323,
+      "SHA256": "250b15c9a8217cdc2eefdd3b063daa8deaa54802a746be60d4308d27e7ee3f1c"
+    },
+    "results/liu2023/figures/A1_region_by_type.pdf": {
+      "字节数": 34944,
+      "SHA256": "b553cad933200e6e00e50c4e5cc1ab87a261b77b862ef6fec45434ee107d3d20"
+    },
+    "results/liu2023/figures/A1_region_by_type.png": {
+      "字节数": 350749,
+      "SHA256": "f18ec0f761f51a3c6cce30154ada2fbf61571a6e9500566be6e886021e295edc"
+    },
+    "results/liu2023/figures/A2_duplicate_Pearson.pdf": {
+      "字节数": 35545,
+      "SHA256": "49eee10af491c53c85498c1e24dfb6c4b4d7cd380e85ef00ae4064f3832b4e64"
+    },
+    "results/liu2023/figures/A2_duplicate_Pearson.png": {
+      "字节数": 249317,
+      "SHA256": "659068738d87a8d5481158574125d71d2221c24643ce3dd6d95408cf2ae3e7a9"
+    },
+    "results/liu2023/figures/A3_joint_UMAP.pdf": {
+      "字节数": 212111,
+      "SHA256": "475f2f13f6b28eea599f8c051374b8212b8c56b51cf712107d800f3e07d76017"
+    },
+    "results/liu2023/figures/A3_joint_UMAP.png": {
+      "字节数": 385233,
+      "SHA256": "18aac2f52a55a2b45a525da686dbd9af3f94cfbab64f8a737e08b681619f2908"
+    },
+    "results/liu2023/final_audit.json": {
+      "字节数": 705,
+      "SHA256": "fc026e5deaabded7a848684930a680f5cb422272cf8f07135f81abbbc231273a"
+    },
+    "results/liu2023/input_diagnostics.csv": {
+      "字节数": 630,
+      "SHA256": "820187f187fc754c9409ae749fe0c5a691619f520ceb14d09d85ae2fda103e42"
+    },
+    "results/liu2023/matrix_verification.json": {
+      "字节数": 376,
+      "SHA256": "9c64ab8103b0c674d896ee4768a80679c826cae8f93ed151d3a84f5f75192a89"
+    },
+    "results/liu2023/model_completed.json": {
+      "字节数": 867,
+      "SHA256": "3145137997177983f1cc4a262c4a1548faf6610a6482e5ebe6c688e224b39db2"
+    },
+    "results/liu2023/README.md": {
+      "字节数": 4500,
+      "SHA256": "b5866cc4d0c1369e549ea1dd4da5f0f5534b12c4efd1aa86e408410f7661228f"
+    },
+    "results/liu2023/run_summary.json": {
+      "字节数": 5213,
+      "SHA256": "98e76d6fdacb11a42fb799002f898852680bae3523b6730c21a8a51e930d3b8e"
+    },
+    "results/liu2023/test_report.json": {
+      "字节数": 684,
+      "SHA256": "9bed160bf4247bc4494648151686471a153bfa00eee7433da5d49707bd488e3d"
+    },
+    "results/liu2023/verification.json": {
+      "字节数": 2344,
+      "SHA256": "4d39811b1ca416848cae0e50d215f954e3375a3e7ff58148f2bc6f6660008456"
+    },
+    "simscDNAm/__init__.py": {
+      "字节数": 160,
+      "SHA256": "21cd7984e0f6ad131526bb23bcd08ea80f702f3b478aefa8bf76981d51fbb6b0"
+    },
+    "simscDNAm/config.py": {
+      "字节数": 2864,
+      "SHA256": "f62bdbed4e19d3fd4dd336d602f20d68305bd787c96df66462622baccb57d4c8"
+    },
+    "simscDNAm/data.py": {
+      "字节数": 19389,
+      "SHA256": "ff7d9e77e5009d82e753b82fdbbc51581cfb8911da46eb6b224064efb52eba34"
+    },
+    "simscDNAm/generation.py": {
+      "字节数": 3791,
+      "SHA256": "36ead00297e01f5ba3f9d3ef404c5153596497112bcc9e2cc7232cceda01ee3c"
+    },
+    "simscDNAm/model.py": {
+      "字节数": 10166,
+      "SHA256": "1b0af0e93d21c301d46879dbcbd80ad6b59d80cc417527e1a6e1da567a6f4089"
+    },
+    "simscDNAm/README.md": {
+      "字节数": 3490,
+      "SHA256": "15bc7655ceec59a507321089a7be1456e78a6fe40ede97246f06ee05199d0c48"
+    },
+    "simscDNAm/requirements.txt": {
+      "字节数": 24,
+      "SHA256": "21342236ba2705eba605b45801a96dd00089ee1d79a7cb7c60f02279f88f2d12"
+    },
+    "simscDNAm/test_contract.py": {
+      "字节数": 3330,
+      "SHA256": "ee4a6e720fca520c0f1cbf4189c05b444f55f2f5ad28e9423fc640e27fa14c92"
+    },
+    "simscDNAm/test_training.py": {
+      "字节数": 4690,
+      "SHA256": "1c8edfa347503454dd3a2c2674bfd7548e92ecea3ce68de71b980999d5f8fe66"
+    },
+    "simscDNAm/test_training_mask.py": {
+      "字节数": 2888,
+      "SHA256": "e4da971d00259f42b4e8e747d0518d69c6b7b18588825a1ec69dda80ae7f6133"
+    },
+    "simscDNAm/train.ipynb": {
+      "字节数": 77626,
+      "SHA256": "60d9c8787cbcc7b6be1b927f00857b96925ef83914f1f093ad3a1548aa207112"
+    },
+    "validation/test_release_pipeline.py": {
+      "字节数": 4504,
+      "SHA256": "3b91fad9953b49bb30d6b862e5a60c3c0b70fa184a9bef38981112313826b4e0"
+    },
+    "validation/test_release_recovery.py": {
+      "字节数": 4585,
+      "SHA256": "1e943f722e8d3e0e32ef993231c5860d356dd32ad440704f2b8bd164a9d44f35"
+    }
+  },
+  "notebook单元格内容SHA256": {
+    "simscDNAm/train.ipynb": "d8e12289d3c312eb907d534e9a377805f0ab35b4809d66088d8a885fc8d7799b",
+    "baseline/FittedMarginal.ipynb": "28a50955b58849e091d796d09926437039aaa19d13e59100c7195458c66bf562",
+    "baseline/simATAC.ipynb": "131920edb2a0c4bb95253f59a700d45ac72e475045bd4aa72479059e03c4fc27",
+    "baseline/simCAS.ipynb": "12f491492d0b88fe3b9136098baa6aae18f6991dec3243a3f8e5dd59d9071b25",
+    "evaluate/A1A2A3.ipynb": "22e8b468a80d4d0f87fad676e6d12f5770bea84a3d403af580a4273297466b43"
+  }
+}

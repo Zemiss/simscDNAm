@@ -1,0 +1,24 @@
+# 四方法统一评估：默认与主模型和baseline的默认输出目录相配。
+# 更换数据时修改所有输入路径、输出目录和对应基因组的marker清单。
+# read_in_memory=true可在内存充足时加快H5AD读取；不改变指标。
+real_h5ad: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_v1_20261110/liu2023/full/HeldoutReal/data.h5ad
+synthetic_h5ad:
+  simscDNAm: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_v1_20261110/liu2023/full/simscDNAm/data.h5ad
+  FittedMarginal: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_v1_20261110/FittedMarginal/data.h5ad
+  simATAC: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_v1_20261110/simATAC/data.h5ad
+  simCAS: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_v1_20261110/simCAS/data.h5ad
+reference_h5ad: /home/sccasimp/data/xb/outputs/simscDNAm/liu2023/duplicate_regions_1000_seed42/f434e3385d87/methods/Truth/data.h5ad
+region_pairs_csv: /home/sccasimp/data/xb/outputs/simscDNAm/liu2023/duplicate_regions_1000_seed42/f434e3385d87/region_pairs.csv
+output_dir: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_v1_20261110/liu2023/full/evaluation_comparison
+a1_regions_csv: a1_marker_regions_liu2023.csv
+genome_assembly: mm10
+label_key: Subclass
+duplicate_count: 1000
+seed: 42
+evaluation_cells: null
+a3_top_regions: 50000
+pca_components: 50
+milisi_neighbors: 10
+umap_seed: 2022
+read_in_memory: false
+spearman_top_regions: 2000

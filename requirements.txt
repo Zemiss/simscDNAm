@@ -1,0 +1,17 @@
+anndata
+h5py
+numpy
+pandas
+scipy
+torch
+scikit-learn
+matplotlib
+umap-learn
+PyYAML
+threadpoolctl
+jupyterlab
+ipykernel
+nbformat
+nbconvert
+nbclient
+pytest

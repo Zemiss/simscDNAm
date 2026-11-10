@@ -1,0 +1,38 @@
+{
+  "状态": "通过",
+  "主模型与已确认映射五项一致": true,
+  "三个baseline五项复算一致": true,
+  "整合前后完整矩阵与NaN一致": true,
+  "checkpoint逐字节一致": true,
+  "训练4740": true,
+  "内部fit": 4257,
+  "内部验证": 483,
+  "留出": 1190,
+  "自然区域数": 272544,
+  "复制区域数": 1000,
+  "固定映射参数": {
+    "因子上限": 32,
+    "投影强度": 1.0
+  },
+  "正式源码SHA256": {
+    "simscDNAm/test_contract.py": "ee4a6e720fca520c0f1cbf4189c05b444f55f2f5ad28e9423fc640e27fa14c92",
+    "simscDNAm/model.py": "1b0af0e93d21c301d46879dbcbd80ad6b59d80cc417527e1a6e1da567a6f4089",
+    "simscDNAm/test_training.py": "1c8edfa347503454dd3a2c2674bfd7548e92ecea3ce68de71b980999d5f8fe66",
+    "simscDNAm/test_training_mask.py": "e4da971d00259f42b4e8e747d0518d69c6b7b18588825a1ec69dda80ae7f6133",
+    "simscDNAm/data.py": "ff7d9e77e5009d82e753b82fdbbc51581cfb8911da46eb6b224064efb52eba34",
+    "simscDNAm/train.ipynb": "72fe11aa233da061d0478355f6547efdcc919d526d7305cd7b06132b41087c19",
+    "simscDNAm/config.py": "f62bdbed4e19d3fd4dd336d602f20d68305bd787c96df66462622baccb57d4c8",
+    "simscDNAm/generation.py": "36ead00297e01f5ba3f9d3ef404c5153596497112bcc9e2cc7232cceda01ee3c",
+    "simscDNAm/__init__.py": "21cd7984e0f6ad131526bb23bcd08ea80f702f3b478aefa8bf76981d51fbb6b0",
+    "evaluate/metrics.py": "e78c00dec22426d3a1b61beeccc31bba2dba3c4cec78b31fc8ea0732871c083a",
+    "evaluate/A1A2A3.ipynb": "f536dfe5d75dac98fc9096686a9f1f4d6927c253924d6d063879289ed730dfeb",
+    "evaluate/test_plotting.py": "d3b25c9e8003a640feeb8c1b9b6147b3f72ecda358a9aae1f957698616fe768a",
+    "evaluate/a1_marker_regions_liu2023.csv": "80c5d77b7306a3a64c12600950e0273d1bf7cc808049e3995a80c88c063f659c",
+    "evaluate/test_notebook.py": "15488f7e8028cbaccc2948f3bf9e0707dd1f9437af1a9476d0ffccd8783d2f03",
+    "evaluate/test_evaluation.py": "0bf20d29a86efad4680906b9eda8ecc6d2dc057c24f05f522b79a62c6859f3c8",
+    "evaluate/preprocessing.py": "dd50309b61aac68429629c0854c1959f961999ef97883422fea3f0dee409f898",
+    "evaluate/__init__.py": "6c24ad1db7291ee60014bd5db263cce913ea133b9a74606bc90fcdb4be2f3778"
+  },
+  "baseline来源": "baseline_20261030既有全维产物，本次统一重新评估，未重新拟合baseline",
+  "评估边界": "同一外层划分已经过多轮查看，属于探索性验证"
+}

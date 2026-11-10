@@ -1,0 +1,15 @@
+anndata
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+umap-learn
+PyYAML
+threadpoolctl
+jupyterlab
+ipykernel
+nbconvert
+nbclient
+nbformat
+pytest

@@ -1,0 +1,20 @@
+{
+  "状态": "通过",
+  "测试统计": {
+    "tests": 58,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "命令": "python -m pytest simscDNAm validation baseline evaluate -q",
+  "包含真实Jupyter执行": true,
+  "独立代码审阅": "通过，无剩余Critical或Important",
+  "数值核验": "1190×273544正式矩阵及NaN与已确认映射一致，checkpoint逐字节一致，四方法五项复算一致",
+  "覆盖的恢复修复": [
+    "原子写入映射参数、JSON和checkpoint",
+    "复用训练矩阵逐值核验",
+    "当前目标配额与留出重建",
+    "原始／完整扩维目标轴",
+    "Windows UTF-8诊断恢复"
+  ]
+}
