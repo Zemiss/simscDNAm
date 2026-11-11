@@ -1,0 +1,71 @@
+{
+  "状态": "通过",
+  "数据集": "liu2023/full",
+  "模式": "ablation",
+  "近邻数": 30,
+  "UMAP近邻数": 30,
+  "训练细胞数": 4740,
+  "留出细胞数": 1190,
+  "自然区域数": 272544,
+  "入选区域数": 50000,
+  "PCA维数": 50,
+  "原10近邻总分及类型中位数回归通过": true,
+  "A1A2逐值保持": true,
+  "所有五项指标有限": true,
+  "未重新训练或选模": true,
+  "权重与合成矩阵状态未变": true,
+  "PCA模式": "冻结坐标",
+  "旧得分来源": "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/evaluation/A1_A2_A3_summary.csv",
+  "旧得分SHA256": "8d37286e588d5b1ddaeab11c09a68ef8317673b162c245b37c45a223ca265bc3",
+  "输入文件状态": {
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/CVAE_training_mask_liu2023_full_20261107_1450/liu2023/full/CVAE_training_mask/data.h5ad": [
+      917613356,
+      1794039226318640378
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/liu2023/duplicate_regions_1000_seed42/f434e3385d87/methods/Truth/data.h5ad": [
+      1907755408,
+      1791949720148959702
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/CVAE_align/data.h5ad": [
+      498002298,
+      1794369523035015098
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/CVAE_raw/data.h5ad": [
+      945923957,
+      1794369296501030577
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/HeldoutReal/data.h5ad": [
+      300242891,
+      1794326328820355614
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/region_pairs.csv": [
+      77187,
+      1794040183559261265
+    ],
+    "/data/cabins/sccasimp/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/simscDNAm/data.h5ad": [
+      460831359,
+      1794326302078126003
+    ],
+    "/prog/cabins/sccasimp/xb/simscDNAm/releases/v1_20261110/evaluate/a1_marker_regions_liu2023.csv": [
+      1419,
+      1794326074058185647
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/CVAE_training_mask_liu2023_full_20261107_1450/liu2023/full/CVAE_training_mask/model.pt": [
+      566113777,
+      1794038501518316928
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/evaluation/A3_PCA_coordinates.csv": [
+      6334518,
+      1794369991962080897
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/evaluation/A1_A2_A3_summary.csv": [
+      720,
+      1794370017902469661
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/evaluation/A3_type_details.csv": [
+      5735,
+      1794369992157083842
+    ]
+  },
+  "指标代码SHA256": "404939423f00697c7d53f8575e3bf697e5412051b122d2b29532e72574752d4a"
+}

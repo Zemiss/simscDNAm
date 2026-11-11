@@ -1,0 +1,79 @@
+{
+  "状态": "通过",
+  "数据集": "tian2023/GSE167577",
+  "模式": "subset",
+  "近邻数": 30,
+  "UMAP近邻数": null,
+  "训练细胞数": 2013,
+  "留出细胞数": 505,
+  "自然区域数": 308814,
+  "入选区域数": 50000,
+  "PCA维数": 50,
+  "原10近邻总分及类型中位数回归通过": true,
+  "A1A2逐值保持": true,
+  "所有五项指标有限": true,
+  "未重新训练或选模": true,
+  "权重与合成矩阵状态未变": true,
+  "PCA模式": "相同训练参照重算并回归",
+  "旧得分来源": "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_subset_comparison_20261111/tian2023/GSE167577/scores.csv",
+  "旧得分SHA256": "7bb3d10a9ae527bcf854479f13720f202d85a06fa0296dfdeeb744bfcc48a9a5",
+  "输入文件状态": {
+    "/home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/tian2023/GSE167577/expanded/legacy/methods/Truth/data.h5ad": [
+      646951417,
+      1792850396086592198
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/tian2023/GSE167577/expanded/legacy/methods/HeldoutReal/data.h5ad": [
+      171085066,
+      1792850417143536952
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_shrink_alignment_20261107/tian2023/GSE167577/methods/mask_alpha_0/data.h5ad": [
+      416611329,
+      1794020713478496064
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_frozen_vae_20261104/tian2023/GSE167577/region_pairs.csv": [
+      77347,
+      1793805477933211478
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_frozen_vae_20261104/tian2023/GSE167577/internal_reference.npz": [
+      9667101,
+      1793805477930211457
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_frozen_vae_20261104/tian2023/GSE167577/work/values.float32.npy": [
+      2494622456,
+      1793805428340861189
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_frozen_vae_20261104/tian2023/GSE167577/work/input_cell_audit.csv": [
+      159257,
+      1793805433039893854
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/milisi_frozen_vae_20261104/tian2023/GSE167577/frozen_beta_1e6/model.pt": [
+      640690737,
+      1793808521374705882
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/tian2023/GSE167577/expanded/legacy/methods/FittedMarginal/data.h5ad": [
+      216565262,
+      1792851976616836968
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/tian2023/GSE167577/expanded/legacy/methods/simATAC/data.h5ad": [
+      102670822,
+      1792852282882783340
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/tian2023/GSE167577/expanded/legacy/methods/simCAS/data.h5ad": [
+      185405309,
+      1792853128899055814
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_subset_comparison_20261111/tian2023/GSE167577/simscDNAm/data.h5ad": [
+      259604689,
+      1794329989446333348
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_subset_comparison_20261111/tian2023/GSE167577/scores.csv": [
+      660,
+      1794330277707177791
+    ],
+    "/home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_subset_comparison_20261111/tian2023/GSE167577/A3_type_details.csv": [
+      9291,
+      1794330277706177782
+    ]
+  },
+  "指标代码SHA256": "404939423f00697c7d53f8575e3bf697e5412051b122d2b29532e72574752d4a"
+}

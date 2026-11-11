@@ -119,7 +119,7 @@ def spearman_vector(values):
     return correlations[np.triu_indices(values.shape[1], k=1)]
 
 
-def milisi(reference_rep, reference_labels, candidate_rep, candidate_labels, n_neighbors=10):
+def milisi(reference_rep, reference_labels, candidate_rep, candidate_labels, n_neighbors=30):
     """PCA 空间中计算来源混合，按真实类型取中位数后做等权平均。"""
     combined = np.vstack([reference_rep, candidate_rep])
     if len(combined) <= n_neighbors or n_neighbors < 1:

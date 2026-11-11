@@ -1,0 +1,13 @@
+milisi_neighbors: 30
+umap_neighbors: 30
+a3_top_regions: 50000
+pca_components: 50
+seed: 42
+label_key: Subclass
+输入:
+  训练参照: /home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/liu2023/GSE215342/expanded/legacy/methods/Truth/data.h5ad
+  真实数据: /home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/liu2023/GSE215342/expanded/legacy/methods/HeldoutReal/data.h5ad
+  simscDNAm: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_subset_comparison_20261111/liu2023/GSE215342/simscDNAm/data.h5ad
+  FittedMarginal: /home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/liu2023/GSE215342/expanded/legacy/methods/FittedMarginal/data.h5ad
+  simATAC: /home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/liu2023/GSE215342/expanded/legacy/methods/simATAC/data.h5ad
+  simCAS: /home/sccasimp/data/xb/outputs/simscDNAm/six_method_subsets_20261024/liu2023/GSE215342/expanded/legacy/methods/simCAS/data.h5ad

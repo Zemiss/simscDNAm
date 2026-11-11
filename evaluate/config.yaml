@@ -18,7 +18,7 @@ seed: 42
 evaluation_cells: null
 a3_top_regions: 50000
 pca_components: 50
-milisi_neighbors: 10
+milisi_neighbors: 30
 umap_seed: 2022
 read_in_memory: false
 spearman_top_regions: 2000

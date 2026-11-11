@@ -1,0 +1,21 @@
+reference_h5ad: /home/sccasimp/data/xb/outputs/simscDNAm/liu2023/duplicate_regions_1000_seed42/f434e3385d87/methods/Truth/data.h5ad
+region_pairs_csv: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/region_pairs.csv
+label_key: Subclass
+duplicate_count: 1000
+seed: 42
+evaluation_cells: null
+a3_top_regions: 50000
+pca_components: 50
+milisi_neighbors: 30
+umap_seed: 2022
+spearman_top_regions: 2000
+a1_regions_csv: /home/sccasimp/program/xb/simscDNAm/releases/v1_knn30_20261111/evaluate/a1_marker_regions_liu2023.csv
+genome_assembly: mm10
+read_in_memory: true
+real_h5ad: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/HeldoutReal/data.h5ad
+synthetic_h5ad:
+  CVAE_raw: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/CVAE_raw/data.h5ad
+  CVAE_mask: /home/sccasimp/data/xb/outputs/simscDNAm/CVAE_training_mask_liu2023_full_20261107_1450/liu2023/full/CVAE_training_mask/data.h5ad
+  CVAE_align: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_full_ablation_20261111/CVAE_align/data.h5ad
+  simscDNAm: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/simscDNAm/data.h5ad
+output_dir: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_knn30_20261111/ablation/liu2023/full
