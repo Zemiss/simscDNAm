@@ -9,7 +9,7 @@ pca_components: 50
 milisi_neighbors: 30
 umap_seed: 2022
 spearman_top_regions: 2000
-a1_regions_csv: /home/sccasimp/program/xb/simscDNAm/releases/v1_knn30_20261111/evaluate/a1_marker_regions_liu2023.csv
+a1_regions_csv: /home/sccasimp/program/xb/simscDNAm/releases/v1_knn30_20261117/evaluate/a1_marker_regions_liu2023.csv
 genome_assembly: mm10
 read_in_memory: true
 real_h5ad: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_release_20261110/validated_final/liu2023/full/HeldoutReal/data.h5ad
@@ -18,4 +18,4 @@ synthetic_h5ad:
   FittedMarginal: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_20261030/FittedMarginal/data.h5ad
   simATAC: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_20261030/simATAC/data.h5ad
   simCAS: /home/sccasimp/data/xb/outputs/simscDNAm/baseline_20261030/simCAS/data.h5ad
-output_dir: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_knn30_20261111/liu2023/full
+output_dir: /home/sccasimp/data/xb/outputs/simscDNAm/simscDNAm_knn30_20261117/liu2023/full

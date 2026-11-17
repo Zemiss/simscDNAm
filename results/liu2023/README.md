@@ -1,30 +1,27 @@
-# Liu2023全量数据：30近邻正式结果
-
-当前A3协议为30近邻。原11月7日权重、同类型真实mask及固定32/1联合秩映射保持不变；训练4740个细胞，内部fit4257、验证483，外层留出1190。现有checkpoint保留原10近邻内部选模历史，本次未重训或重新选模；未来训练默认30近邻。
+# Liu2023全量：30-NN实际重算结果
 
 **Liu2023全数据集**
 
 训练4740个细胞，留出1190个细胞。
 
-| 版本 | A1 1-WD↓ | A1 MSE↓ | A1 Pearson↑ | A2 Pearson↑ | A3 miLISI↑ |
+| 方法 | A1 1-WD↓ | A1 MSE↓ | A1 Pearson↑ | A2 Pearson↑ | A3 miLISI↑ |
 |---|---:|---:|---:|---:|---:|
 | simscDNAm | **0.03594** | 1.368e-05 | **0.92122** | **0.99990** | **1.66503** |
 | FittedMarginal | 0.04577 | **1.163e-05** | 0.87630 | 0.06875 | 1.53475 |
 | simATAC | 0.59684 | 6.289e-04 | 0.38555 | 0.00044 | 1.17401 |
 | simCAS | 0.79551 | 7.649e-02 | 0.61397 | 0.27713 | 1.53773 |
 
-A1/A2逐值复用原已核验结果；A3复用冻结的训练参照ANOVA50000/PCA50坐标重新计算，原10近邻总分及类型明细回归通过。全量四方法和九子集共40行结果，以及四版本消融，见[完整报告](../knn30_20261111/README.md)。
+十组四方法比较中，simscDNAm的1-WD、A1 Pearson、A2 Pearson均在10组最优，miLISI在6组最优；FittedMarginal在其余4组miLISI以及全部10组MSE上最优。全量消融仍显示对齐改善边缘分布和复制相关性，同时降低miLISI。
 
-相对未对齐CVAE＋mask，对齐后1-WD由0.142403降至0.035940，复制Pearson由0.980443升至0.999896；A1 Pearson由0.929280降至0.921216，30近邻miLISI由1.885830降至1.665028。完整模型未在所有质量指标上提升。
+A2按各版本实际有效配对计算，缺失或恒定列不能计算的配对不会补分。高复制相关来自联合后处理约束。小类型沿用原对齐规则，未逐子集调参。当前划分曾多轮查看，不属于新的独立外部盲测。邻域尺度改变本身不代表生成数据质量改善。
 
-固定区域、缺失配对及simATAC/simCAS数值域解释沿用原协议。原训练／矩阵回放核验文件保留原始日期和参数；当前评估参数与核验以本页config.yaml、run_summary.json及verification.json为准。
 
-![固定区域边缘分布](figures/A1_marginal_regions.png)
+本页五项指标已于2026年11月17日通过Jupyter实际重算。权重和数据不变，A3在同一冻结PCA空间计算。完整十组比较与消融见[本轮报告](../knn30_20261117/README.md)。
 
-![按Subclass的边缘分布](figures/A1_region_by_type.png)
+![边缘分布](figures/A1_marginal_regions.png)
 
-![复制区域Pearson](figures/A2_duplicate_Pearson.png)
+![按类型边缘分布](figures/A1_region_by_type.png)
 
-![30近邻联合UMAP](figures/A3_joint_UMAP.png)
+![复制相关性](figures/A2_duplicate_Pearson.png)
 
-各面板分别拟合联合UMAP，坐标不能跨面板比较；图中miLISI从PCA空间计算。所有图同时提供PDF。
+![30近邻UMAP](figures/A3_joint_UMAP.png)

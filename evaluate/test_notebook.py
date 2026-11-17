@@ -129,6 +129,7 @@ ad.read_h5ad = _original_read_h5ad
     nbformat.write(executed, tmp_path / "executed.ipynb")
     output = tmp_path / "results"
     summary = pd.read_csv(output / "A1_A2_A3_summary.csv").set_index("方法")
+    assert summary["近邻数"].eq(30).all()
     np.testing.assert_allclose(summary["加权 1-WD"], 0, atol=1e-12)
     np.testing.assert_allclose(summary["加权 MSE"], 0, atol=1e-12)
     np.testing.assert_allclose(summary["加权 Pearson"], 1, atol=1e-12)

@@ -1,0 +1,52 @@
+{
+  "状态": "通过",
+  "默认服务器项目目录已同步30近邻": true,
+  "备份目录": "/home/sccasimp/program/xb/simscDNAm/runs/knn30_20261117/source_backup",
+  "修改文件数": 5,
+  "明细": [
+    {
+      "文件": "evaluate/A1A2A3.ipynb",
+      "原SHA256": "57b61894d66668bc883122c54ab73beda170fc00bfa2f44e5cd031f0a4ab4f36",
+      "新SHA256": "009d929bc07fd46a2e53d7bf1161c3ead74e6c2e1af8e198c597797760aab027"
+    },
+    {
+      "文件": "evaluate/config.yaml",
+      "原SHA256": "a49e20d68562e3b84dd86f3896c2b0a88e095fbaee9927cce5d2caaf818187da",
+      "新SHA256": "ac24c5c97b88e46861be1bd0b9179793f917dfc606631cade25489c412d1114f"
+    },
+    {
+      "文件": "evaluate/metrics.py",
+      "原SHA256": "e78c00dec22426d3a1b61beeccc31bba2dba3c4cec78b31fc8ea0732871c083a",
+      "新SHA256": "7770fe29958e40f1627d970a47d78a93f7de4bf6de1d1977ff10b8fbbaed19ac"
+    },
+    {
+      "文件": "mian/retrain_evaluate_20261030.ipynb",
+      "原SHA256": "e923ca5ca96a79885340e47bb237aba0fd460a87cb415d35647d97230ff53b6b",
+      "新SHA256": "2d83f9113be2aea49ee778e471508c763495797628a7067f17f710796bd03cb0"
+    },
+    {
+      "文件": "evaluate/runs/mian_full_20261030.yaml",
+      "原SHA256": "7008b57edce986e1f9cf3d9923785c17f2438fa7e63806b86e115c52c76d7849",
+      "新SHA256": "42e5036c673ebf891dcec985d16e9dbe8f9f734b3f4d2cfaeaa55f8b043b6b87"
+    }
+  ],
+  "历史执行记录已原样归档": [
+    {
+      "原路径": "/home/sccasimp/program/xb/simscDNAm/evaluate/miLISI_k10_k20_20261111.executed.ipynb",
+      "归档路径": "/home/sccasimp/program/xb/simscDNAm/runs/knn30_20261117/historical_notebooks/evaluate/miLISI_k10_k20_20261111.executed.ipynb",
+      "原始内容SHA256": "99356282e0f2576834dc72b4d46211a3bf8417a1e39dd7bde297d69e7dd7b472"
+    },
+    {
+      "原路径": "/home/sccasimp/program/xb/simscDNAm/evaluate/miLISI_k10_k20_k30_20261111.executed.ipynb",
+      "归档路径": "/home/sccasimp/program/xb/simscDNAm/runs/knn30_20261117/historical_notebooks/evaluate/miLISI_k10_k20_k30_20261111.executed.ipynb",
+      "原始内容SHA256": "50f9f1e08aa0ae68c4e55ebe8e36359548a586ed0bbb237444d7899333067502"
+    }
+  ],
+  "默认评估源码SHA256": {
+    "evaluate/A1A2A3.ipynb": "009d929bc07fd46a2e53d7bf1161c3ead74e6c2e1af8e198c597797760aab027",
+    "evaluate/metrics.py": "7770fe29958e40f1627d970a47d78a93f7de4bf6de1d1977ff10b8fbbaed19ac",
+    "evaluate/preprocessing.py": "dd50309b61aac68429629c0854c1959f961999ef97883422fea3f0dee409f898",
+    "evaluate/a1_marker_regions_liu2023.csv": "80c5d77b7306a3a64c12600950e0273d1bf7cc808049e3995a80c88c063f659c"
+  },
+  "默认项目源码递归检查": "通过"
+}
