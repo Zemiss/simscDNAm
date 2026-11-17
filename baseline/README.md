@@ -1,16 +1,25 @@
-# 基线推理
+# 基线训练与生成
 
-每个基线有独立文件夹和 `inference.ipynb`，算法及生成函数直接写在 notebook 内。均使用 `data/prepare.ipynb` 导出的完整训练集、独立留出集的 Subclass 配额及相同区域轴。修改各入口的 `DATASET` 和路径后，通过 simscDNAm 环境的 Jupyter 运行。
+各基线目录的 `inference.py` 独立运行，使用同一预处理训练集、目标 Subclass 配额和完整区域轴。
 
-| 基线 | 依赖及方法 |
+```bash
+python -m baseline.FittedMarginal.inference --dataset liu2023/full
+python -m baseline.simATAC.inference --dataset liu2023/full
+python -m baseline.simCAS.inference --dataset liu2023/full
+python -m baseline.STADiffuser.inference --dataset liu2023/full --device cuda:0
+```
+
+各入口支持 `--training`、`--target`、`--output` 和 `--seed`，使用 `--help` 查看全部参数。默认结果写入 `outputs/baseline/<数据集>/<基线>/`。模块导入和帮助命令不会开始训练或安装依赖。
+
+| 基线 | 依赖与方法 |
 |---|---|
-| FittedMarginal | Python；按类型拟合零、一、Beta 混合分布，保留观测率与 NaN |
-| simATAC | R、Rscript 和官方 simATAC；训练中位数填补，保留现有小类型估计回退 |
-| simCAS | 官方 simCAS、rpy2 和 R4；将官方仓库放在 `simCAS/vendor/`，`R_HOME` 按机器调整 |
-| STADiffuser | 官方提交 `11be35ffce082d5d9cd4bfdcc8f8352fb4a58971`；首次运行下载并核对 SHA256，依赖放在 `STADiffuser/.runtime/`；需要 CUDA |
+| FittedMarginal | Python；零、一和 Beta 混合边缘分布，保留观测率与 NaN |
+| simATAC | R、Rscript 和官方 simATAC；训练中位数填补，保留原小类型估计回退；独立 R 库路径为 `baseline/simATAC/.runtime/r_library` |
+| simCAS | 官方源码放入 `baseline/simCAS/vendor/`，另需 rpy2 和 R4；使用环境变量 `R_HOME` 指定 R 运行时，未设置时沿用服务器默认路径 |
+| STADiffuser | 固定官方提交 `11be35ffce082d5d9cd4bfdcc8f8352fb4a58971`，首次正式运行下载并校验源码，固定依赖放入 `.runtime/`；需要 CUDA |
 
-输出放在 `outputs/baseline/<数据集>/<基线>/`。三个传统基线生成 `data.h5ad`、复制配对表和 `verification.json`。STADiffuser 正式训练为 AE 500 轮、扩散 1000 轮；`pilot` 仅为试运行，独立存入 `pilot/`。非空间配置使用自环图与 `spatial_coord=None`，不做 RNA 总量归一化。
+STADiffuser 使用 `--mode pilot` 进行独立试运行，结果放在 `pilot/`。正式训练为 AE 500 轮、扩散 1000 轮；非空间配置使用自环图与 `spatial_coord=None`，不做 RNA 总量归一化。
 
-复制区域在训练前就已存在，各模型直接生成全部列。simATAC、simCAS 保留原生计数／分数，STADiffuser 保留原生连续输出，不为改善评估而截断、加掩码或对齐。
+复制区域在训练前就已存在，各模型直接生成全部列。simATAC、simCAS 保留原生计数／分数，STADiffuser 保留原生连续输出，不截断、不增加训练掩码或对齐。
 
-三个传统基线保留原 `replay` 校验模式，仅用于核对历史中间结果；常规运行保持 `RUN_MODE="run"`、`REFERENCE_PATH=None`。
+三个传统基线支持 `--reference 已有结果.h5ad` 进行逐元素核对。仅在需要重放历史中间结果时使用 `--replay-root 历史根目录` 并同时提供 `--reference`。

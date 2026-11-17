@@ -1,4 +1,4 @@
-"""默认超参数与 train.ipynb 保持一致。"""
+"""训练超参数及 JSON 配置读取。"""
 from dataclasses import dataclass, asdict
 from pathlib import Path
 import json

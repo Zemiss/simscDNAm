@@ -43,7 +43,7 @@ CVAE_raw取自既有同划分、30近邻消融结果。相比未加mask或联合
 
 [result_verification.json](result_verification.json)记录本次核验：500轮AE和1000轮扩散日志连续且损失有限；1190个留出ID、1000对复制映射与旧结果逐项一致；真实逐类型数量、权重、均值和缺失诊断一致；原四方法得分保持；新增A1类型加权、A2配对均值、A3类型中位数等权汇总复算一致。
 
-入口：[baseline/STADiffuser/inference.ipynb](../../../baseline/STADiffuser/inference.ipynb)。上游固定提交为11be35ffce082d5d9cd4bfdcc8f8352fb4a58971，六个文件SHA256一致。保留官方网络、损失、32维潜空间和批内注意力，训练批大小256；自环图、空间条件None、Subclass生成、全目标共同解码。
+入口：[baseline/STADiffuser/inference.py](../../../baseline/STADiffuser/inference.py)。上游固定提交为11be35ffce082d5d9cd4bfdcc8f8352fb4a58971，六个文件SHA256一致。保留官方网络、损失、32维潜空间和批内注意力，训练批大小256；自环图、空间条件None、Subclass生成、全目标共同解码。
 
 服务器产物位于/home/sccasimp/data/xb/outputs/simscDNAm/STADiffuser_20261111/。本地已同步正式配置、日志、核验、指标和PNG图，未下载大型H5AD或权重。启动快照保留于历史归档；正式状态见[full/status.json](full/status.json)，评估记录见[evaluation/run_summary.json](evaluation/run_summary.json)。本次仅读取结果，未创建服务器终端或计算内核。
 

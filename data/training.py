@@ -1,4 +1,4 @@
-"""完整扩维训练输入；保留 notebook 的缺失填补和内部验证划分。"""
+"""完整扩维训练输入；训练输入的缺失填补与内部验证划分。"""
 from __future__ import annotations
 from pathlib import Path
 import hashlib

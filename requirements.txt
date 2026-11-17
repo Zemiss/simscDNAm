@@ -9,8 +9,3 @@ matplotlib
 umap-learn
 PyYAML
 threadpoolctl
-jupyterlab
-ipykernel
-nbformat
-nbconvert
-nbclient
