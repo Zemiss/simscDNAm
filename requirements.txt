@@ -14,4 +14,3 @@ ipykernel
 nbformat
 nbconvert
 nbclient
-pytest

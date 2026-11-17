@@ -1,8 +1,0 @@
-{
-  "状态": "通过",
-  "相关测试数": 43,
-  "失败数": 0,
-  "命令": "python -m pytest evaluate simscDNAm validation -q",
-  "本轮科学计算": "11个服务器Jupyter Notebook均正常退出，44个10近邻回归及30近邻重算通过",
-  "图表核对": "全量四方法及全量消融的30近邻UMAP已目视检查"
-}

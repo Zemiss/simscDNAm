@@ -1,22 +1,24 @@
 # simscDNAm
 
-simscDNAm 用于生成单细胞DNA甲基化数据，完整流程为 **CVAE及条件潜空间扩散 → 同类型训练缺失掩码 → 联合秩映射与经验分位数对齐**。训练、生成和映射在Jupyter中执行。
+单细胞 DNA 甲基化数据模拟。正式流程为：条件 VAE 与潜空间扩散 → 同类型训练缺失掩码 → 联合秩映射及经验分位数对齐。训练、推理和评估 notebook 均通过 Jupyter 运行，环境使用 `simscDNAm`。
 
 ## 目录
 
-| 入口 | 用途 |
+| 目录 | 职责与入口 |
 |---|---|
-| [simscDNAm/train.ipynb](simscDNAm/train.ipynb) | 主模型训练或复用checkpoint，依次执行mask和对齐，导出正式数据 |
-| [simscDNAm/README.md](simscDNAm/README.md) | 模型结构、配置、复用条件、输出和方法边界 |
-| [baseline/FittedMarginal.ipynb](baseline/FittedMarginal.ipynb) | 零、一和Beta混合边缘基线 |
-| [baseline/simATAC.ipynb](baseline/simATAC.ipynb) | simATAC及既有小类别估计回退 |
-| [baseline/simCAS.ipynb](baseline/simCAS.ipynb) | 官方simCAS及固定类别配额抽样 |
-| [evaluate/A1A2A3.ipynb](evaluate/A1A2A3.ipynb) | 四方法统一A1/A2/A3和四类PNG/PDF图 |
-| [results/liu2023/README.md](results/liu2023/README.md) | Liu2023全量数据比较、实际配置、分数与图表 |
+| `data/` | [prepare.ipynb](data/prepare.ipynb) 处理原始数据；模块负责输入、质控、划分和复制区域 |
+| `model/src/` | 条件 VAE、潜空间去噪器、扩散日程、损失、DDIM 与配置 |
+| `model/script/` | [train.ipynb](model/script/train.ipynb) 训练；[inference.ipynb](model/script/inference.ipynb) 复用模型推理 |
+| `baseline/FittedMarginal/` | [inference.ipynb](baseline/FittedMarginal/inference.ipynb)，零、一和 Beta 混合边缘基线 |
+| `baseline/simATAC/` | [inference.ipynb](baseline/simATAC/inference.ipynb)，官方 simATAC 与既有小类型估计回退 |
+| `baseline/simCAS/` | [inference.ipynb](baseline/simCAS/inference.ipynb)，官方 simCAS 与固定类型配额抽样 |
+| `baseline/STADiffuser/` | [inference.ipynb](baseline/STADiffuser/inference.ipynb)，禁用空间条件的官方模型 |
+| `evaluate/A1/` | [evaluate.ipynb](evaluate/A1/evaluate.ipynb)，边缘分布指标及两类分布图 |
+| `evaluate/A2/` | [evaluate.ipynb](evaluate/A2/evaluate.ipynb)，复制区域相关性及小提琴／柱状图 |
+| `evaluate/A3/` | [evaluate.ipynb](evaluate/A3/evaluate.ipynb)，ANOVA、PCA、30近邻 miLISI 及联合 UMAP |
+| `outputs/` | [输出规则](outputs/README.md)，按数据集、模型和实验分开；旧结果归档 |
 
-## 环境与运行
-
-使用conda环境`simscDNAm`，从仓库根目录启动Jupyter，并选择`simscdnam`内核：
+## 运行顺序
 
 ```bash
 conda activate simscDNAm
@@ -25,35 +27,23 @@ python -m ipykernel install --user --name simscdnam --display-name "Python (sims
 jupyter lab
 ```
 
-1. 准备真实训练H5AD与独立留出H5AD，均含真实`obs['Subclass']`；训练输入的完整区域轴须在训练前追加1000个复制区域并保留配对CSV。NaN表示缺失，0是真实数值。
-2. 修改主模型notebook的`DATASETS`、`RUN_DATASETS`和`RUN_ROOT`。`PRETRAINED_RUNS={}`从头训练；填写既有CVAE＋mask目录可复用。默认提供Liu2023全量数据的服务器路径示例。
-3. 修改并运行三个baseline notebook。默认`RUN_MODE="run"`实际生成；需要R和官方simCAS运行时，详见[baseline说明](baseline/README.md)。
-4. 在[evaluate/config.yaml](evaluate/config.yaml)填写同一真实留出、真实训练参照、四种方法输出和配对CSV，运行统一评估notebook。
+1. 修改并运行 `data/prepare.ipynb`，生成同一数据集的训练／留出 H5AD 和 `region_pairs.csv`。原始矩阵为细胞 × 区域，须有真实 `obs['Subclass']`；NaN 为缺失，0 为真实零值。
+2. 修改并运行 `model/script/train.ipynb`。已有完整训练目录时，在 `inference.ipynb` 加载 checkpoint、内部 fit 掩码和映射参数生成新数据。
+3. 运行各基线目录内的 `inference.ipynb`，使用相同训练输入与目标配额。R 和官方模型依赖见 [baseline/README.md](baseline/README.md)。
+4. 修改 [evaluate/config.yaml](evaluate/config.yaml)，只列出本轮已完成的方法，分别运行 A1/A2/A3 的 notebook，各入口只执行本实验。服务器改用 [config.server.yaml](evaluate/config.server.yaml)。
 
-输出应使用新目录。输入、模型权重、H5AD、拟合分位数和大型缓存不随代码仓库上传；本仓库保存代码、小型结果表和图表。
+本地原始数据放在 `data/raw/`，运行结果写入 `outputs/`。服务器原始数据只读取 `/home/sccasimp/data/xb/simscDNAm/`，代码位于 `/home/sccasimp/program/xb/simscDNAm/`，产物只写 `/home/sccasimp/data/xb/outputs/simscDNAm/`。大矩阵、权重、缓存和运行中的 notebook 输出不提交 Git。
 
-## 方法和评估口径
+## 评估口径与解释
 
-CVAE保持原网络、损失和DDIM生成。mask整行抽自同Subclass的内部fit真实细胞。对齐只用fit真实值：先在正态秩空间学习最多32个联合PCA因子，投影生成分数并调整因子协方差，再逐区域匹配真实经验分位数；固定投影强度1。小样本类型保持原生成值，缺失位置保持。
-
-对齐作用于同类型的一整批生成细胞，会改变原CVAE的排序和细胞几何。高复制相关来自后处理约束，不能单独证明原CVAE自主学好依赖结构。
-
-| 评估 | 内容 |
+| 实验 | 定义 |
 |---|---|
-| A1 | 全部自然区域的同类型1-WD、类型细胞均值MSE、区域均值Pearson，按真实类型比例加权 |
-| A2 | 1000对原始／复制区域实际输出的Pearson，报告有效配对数；另存自然区域Spearman统计 |
-| A3 | 在真实训练参照上ANOVA选50000自然区域、PCA50维，再算30近邻miLISI；逐方法联合UMAP用于展示 |
+| A1 | 自然区域按真实类型比例加权的 1-WD、类型细胞均值 MSE、区域均值 Pearson |
+| A2 | 实际生成的 1000 对原始／复制区域 Pearson；另存自然区域 Spearman 辅助统计 |
+| A3 | 真实训练参照 ANOVA 选最多 50000 个自然区域、PCA 最多 50 维、30近邻 miLISI；按类型中位数等权平均 |
 
-当前全量及九个子集的四方法比较、全量缺失mask／对齐消融，统一采用30近邻，见[完整得分与图表](results/knn30_20261117/README.md)。miLISI仍按真实Subclass的中位数等权平均，UMAP也使用30近邻。本地源码与服务器默认目录均使用30近邻；本轮五项指标已实际重算，权重与合成数据保持不变。
+A1/A3 排除末尾 1000 个复制区域，合成矩阵不截断；A2 不在生成后重建复制列。图中文字使用英文，其余说明使用中文。
 
-A1/A3排除复制尾部，合成值不截断。simATAC和simCAS使用当前协议的比例输入、保留原生计数／分数，数值域可能超过0–1；数值域差异见输入诊断，不将该比较解释为原方法在其原任务上的能力排序。
+联合秩映射只使用内部 fit 真实值，但会改变原生成排序与几何，高复制相关不能单独证明原始 VAE 学到了依赖结构。simATAC、simCAS 保留原生计数或分数，可能超出 0–1；当前比较存在数值域差异。已多轮查看的留出结果属于探索性验证。
 
-Liu2023本轮使用4740训练细胞（4257 fit、483内部验证）和1190留出细胞，映射在全部273544个区域上应用同一规则。该留出划分已多轮查看，属于探索性验证。对齐明显改善1-WD和复制Pearson，也降低原CVAE的A1 Pearson、miLISI；完整升降见结果页。
-
-## 验证
-
-```bash
-python -m pytest simscDNAm validation baseline evaluate -q
-```
-
-覆盖网络与训练隔离、mask来源、映射分位数、NaN、区域轴、训练缓存核验、中断恢复，以及通过真实Jupyter内核运行的两种参照和两种H5AD读取模式。完整数据复现另核对正式映射矩阵、NaN、checkpoint与五项指标。
+既有结果：[2026年11月17日全量及子集比较](outputs/reports/knn30_20261117/README.md)、[STADiffuser 五方法比较](outputs/reports/stadiffuser_20261111/README.md)。本轮仅整理代码与路径，未重新训练这些正式结果。
