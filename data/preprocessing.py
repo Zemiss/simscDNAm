@@ -1,5 +1,6 @@
 """原始甲基化数据质控、分层划分及训练前追加复制区域。"""
 from pathlib import Path
+from contextlib import ExitStack
 import json
 
 import anndata as ad
@@ -10,6 +11,35 @@ import scipy.sparse as sp
 
 from data.training import inspect_inputs, materialize_inputs, stratified_group_split
 from data.evaluation import region_pairs, validate_real_duplicates
+
+
+def filter_training_subclasses(training_path, heldout_path, output_dir, min_cells=10):
+    """按外层训练集的 Subclass 频数过滤两份真实数据，保留原有行列顺序。"""
+    output_dir = Path(output_dir).resolve()
+    with ExitStack() as stack:
+        training, heldout = [ad.read_h5ad(path, backed='r') for path in (training_path, heldout_path)]
+        for item in (training, heldout):
+            stack.callback(item.file.close)
+        if not training.var_names.equals(heldout.var_names) or len(training.obs_names.intersection(heldout.obs_names)):
+            raise ValueError('训练与测试必须具有相同区域轴、相互独立的细胞')
+        labels = [item.obs['Subclass'].astype(str) for item in (training, heldout)]
+        counts = pd.concat([s.value_counts() for s in labels], axis=1).fillna(0).astype(int).sort_index()
+        counts.columns = ['训练细胞数', '测试细胞数']
+        counts['保留'] = counts['训练细胞数'] >= min_cells
+        counts.index.name = 'Subclass'
+        kept = counts.index[counts['保留']]
+        masks = [s.isin(kept).to_numpy() for s in labels]
+        if not all(mask.any() for mask in masks):
+            raise ValueError('过滤后训练或测试集为空')
+        output_dir.mkdir(parents=True, exist_ok=True)
+        for name, item, mask in zip(('TrainingReal', 'HeldoutReal'), (training, heldout), masks):
+            path = output_dir / f'{name}.h5ad'
+            if path in (Path(training_path).resolve(), Path(heldout_path).resolve()):
+                raise ValueError('过滤结果不能覆盖输入')
+            partial = path.with_suffix('.h5ad.partial')
+            item[mask].to_memory().write_h5ad(partial, compression='gzip')
+            partial.replace(path)
+    return counts
 
 
 def write_expanded_real(path, matrix, rows, metadata, var, pairs, row_block=16):

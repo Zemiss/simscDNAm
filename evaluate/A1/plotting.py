@@ -95,7 +95,7 @@ def plot_marginal_regions(datasets, rows, methods, regions, output):
     figure.suptitle("Literature-guided Tle4 locus windows (mm10)" if regions["展示名称"].str.startswith("Tle4").all()
                      else "Literature-guided marginal distributions", fontsize=11, weight="bold", y=1.01)
     figure.text(0.075, 0.015, "All cell types pooled. Shared 30 bins; finite values only; out-of-range mass is not clipped.\n"
-                "Windows were selected using real training cells within the published example locus; full-genome scores are unchanged.",
+                  "Windows are within the published example locus.",
                 fontsize=7, color="#555555")
     pd.concat(source_tables, ignore_index=True).to_csv(output / "A1_plot_histograms.csv", index=False)
     save_figure(figure, output, "A1_marginal_regions")
@@ -116,7 +116,7 @@ def plot_region_by_type(datasets, rows, methods, regions, output):
     upper = max(0.1, np.ceil(max(item[0].max() for item in histograms.values()) * 12) / 10)
     figure, axes = plt.subplots(len(methods), len(levels), figsize=(3.0 * len(levels), 1.9 * len(methods) + 1),
                                 sharex=True, sharey=True, squeeze=False)
-    figure.subplots_adjust(left=0.09, right=0.995, bottom=0.85 / figure.get_figheight(), top=1 - 1.0 / figure.get_figheight(), wspace=0.12, hspace=0.24)
+    figure.subplots_adjust(left=0.09, right=0.995, bottom=0.85 / figure.get_figheight(), top=1 - 1.35 / figure.get_figheight(), wspace=0.12, hspace=0.24)
     for i, method in enumerate(methods):
         for j, level in enumerate(levels):
             axis = axes[i, j]
@@ -131,7 +131,7 @@ def plot_region_by_type(datasets, rows, methods, regions, output):
                 axis.set_ylabel(f"{plot_name(method)}\nProbability per bin", color=plot_color(method), fontsize=8)
             if i == len(methods) - 1:
                 axis.set_xlabel("Methylation level", fontsize=8)
-    marginal_legend(figure, methods, 0.95)
+    marginal_legend(figure, methods, 1 - 0.48 / figure.get_figheight())
     figure.suptitle(f"{detail['展示名称']} | {detail['原region']}\nSingle-region distributions by Subclass",
                    fontsize=11, weight="bold", y=1.01)
     figure.text(0.09, 0.015, "Rows: methods. Columns: saved cell types. R = evaluation real; S = synthetic; n counts finite observations.\n"

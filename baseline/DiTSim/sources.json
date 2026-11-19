@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/BioX-NKU/DiTSim",
+  "commit": "52231d81ee7d98c6222ad51539624e1204ebf6a9",
+  "sha256": {
+    "ae.py": "77d439272bd4a3d1a8d788f8e7092f0e7824e6f72b564da0632d5aadcf6594b9",
+    "ae_trainer.py": "ffc4931fb697d3c9c708916cf018f660f4cf8aa6b04e8a4841eb70d09fee684c",
+    "diffusion.py": "78397255e0cc074ab4f20aecdaa285b50b496500d3352f8535ff64c7233e79c0",
+    "dit_trainer.py": "c20367a5c2c5f891a40ebafacd2203a78311f0ec9f2dafa54a77ad393a7c9603",
+    "ditsim.yml": "986f7ddee2e5f7b8421d374807b0fcfdf95ecb9e3f336ac1fc94aa9b3a7cb97e",
+    "LICENSE": "17647d15e09a4765abfd25aa7ccdc5c8bc491d57b487c7e3286d5ae50a9d7c0f",
+    "loaders.py": "0caf6b4881a76ca30f65e49d828be05570cf50d108a28e107310b012e2795b09",
+    "quick_start.py": "50830e5430b993c98201c324c6c2756f029fd32d36b4de05614fea2adb3846fa",
+    "transformer.py": "6851d34f769bb99d3ebd0a5695ef4186e4fac7119369c3d7417fbe1c36b25795"
+  }
+}

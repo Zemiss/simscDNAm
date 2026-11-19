@@ -21,6 +21,8 @@ python -m model.script.train --help
 
 默认读取共用预处理目录，使用原四个内部候选；真实留出矩阵不参与训练或选模。`--training`、`--target`、`--pairs` 指定输入，`--output-root` 指定训练输出父目录。`--config` 可读取 JSON 中的 TrainingConfig 字段，省略字段沿用配置类默认值。
 
+内部选模和训练后生成默认使用 10 步 DDIM。可在训练 JSON 中通过 `DDIM_SAMPLING_STEPS` 覆盖。
+
 产物写入 `outputs/model/<数据集>/`，正式模型位于其中 `simscDNAm/`，包含 `model.pt`、`alignment/` 与 `data.h5ad`。输入、配置或源码签名变化时拒绝恢复到原目录，请使用新的输出目录。
 
 ## 推理与训练复用
@@ -32,6 +34,8 @@ python -m model.script.train --dataset liu2023/full --reuse 既有训练目录 -
 ```
 
 独立推理先逐值核对原训练 H5AD 与训练缓存，再执行 DDIM → 同 Subclass 内部 fit 掩码 → 已拟合联合秩映射。默认输出 `outputs/inference/<数据集>/simscDNAm/`，非空目录拒绝覆盖。
+
+独立推理默认使用 10 步 DDIM，包括加载旧 checkpoint 时。可用 `--sampling-steps 50` 生成 50 步结果。扩散日程短于 10 步时，默认使用该日程的总步数。
 
 需要同时保留 checkpoint、映射参数、`work/` 训练缓存、细胞审计和 `internal_reference.npz`。训练复用会在新目录记录源缓存位置，独立推理自动读取该来源；请保留源训练缓存。旧版本的 v 预测权重及映射仍可加载，继续训练时的源码签名基于当前 Python 文件。
 

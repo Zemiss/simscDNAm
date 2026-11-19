@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 PLOT_COLORS = {"真实数据": "#A6A6A6", "Real": "#A6A6A6",
     "simscDNAm": "#3B73B9", "CVAE_training_mask": "#3B73B9", "FittedMarginal": "#269D91",
-    "simATAC": "#A487C9", "simCAS": "#D95F02", "STADiffuser": "#B44C76"}
+    "simATAC": "#A487C9", "simCAS": "#D95F02", "PeakVI": "#CC79A7",
+    "DiTSim": "#C49A35"}
 
 
 

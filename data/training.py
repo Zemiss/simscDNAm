@@ -291,16 +291,34 @@ class FullMethylationDataset(Dataset):
         positions: np.ndarray,
         medians: np.ndarray,
         labels: np.ndarray,
+        device: torch.device | None = None,
     ) -> None:
         self.matrix = matrix
         self.rows = np.asarray(retained_rows[positions], dtype=np.int64)
         self.medians = np.asarray(medians, dtype=np.float32)
         self.labels = np.asarray(labels[positions], dtype=np.int64)
+        self.cached = None
+        if device is not None:
+            shape = (len(self.rows), matrix.shape[1])
+            values = torch.empty(shape, dtype=torch.float32, device=device)
+            observed = torch.empty(shape, dtype=torch.bool, device=device)
+            fill = torch.as_tensor(self.medians, device=device)
+            for start in range(0, len(self.rows), 32):
+                stop = min(start + 32, len(self.rows))
+                block = torch.as_tensor(np.asarray(matrix[self.rows[start:stop]]), dtype=torch.float32, device=device)
+                mask = torch.isfinite(block)
+                if not mask.any(dim=1).all():
+                    raise ValueError("训练输入存在全缺失细胞")
+                values[start:stop] = torch.where(mask, block, fill)
+                observed[start:stop] = mask
+            self.cached = values, observed, torch.as_tensor(self.labels, device=device)
 
     def __len__(self) -> int:
         return len(self.rows)
 
     def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        if self.cached is not None:
+            return tuple(value[index] for value in self.cached)
         values = np.array(self.matrix[int(self.rows[index])], dtype=np.float32, copy=True)
         observed = np.isfinite(values)
         if not observed.any():

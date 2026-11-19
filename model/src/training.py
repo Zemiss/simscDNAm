@@ -137,12 +137,14 @@ def train_candidate(matrix, retained_rows, medians, labels, class_names,
     ) -> tuple[DataLoader, DataLoader]:
         generator = torch.Generator().manual_seed(SEED)
         train_dataset = FullMethylationDataset(
-            matrix, retained_rows, train_positions, medians, labels
+            matrix, retained_rows, train_positions, medians, labels,
+            device=DEVICE if DEVICE.type == "cuda" else None,
         )
         validation_dataset = FullMethylationDataset(
-            matrix, retained_rows, validation_positions, medians, labels
+            matrix, retained_rows, validation_positions, medians, labels,
+            device=DEVICE if DEVICE.type == "cuda" else None,
         )
-        common = {"batch_size": TRAIN_BATCH_SIZE, "num_workers": 0, "pin_memory": DEVICE.type == "cuda"}
+        common = {"batch_size": TRAIN_BATCH_SIZE, "num_workers": 0, "pin_memory": False}
         return (
             DataLoader(train_dataset, shuffle=True, generator=generator, **common),
             DataLoader(validation_dataset, shuffle=False, **common),
@@ -281,9 +283,9 @@ def train_candidate(matrix, retained_rows, medians, labels, class_names,
         representation = evaluate_representation(model, loader, device)
         real, observed, labels = [], [], []
         for batch, mask, classes in loader:
-            real.append(batch[:, features].numpy())
-            observed.append(mask[:, features].numpy())
-            labels.append(classes.numpy())
+            real.append(batch[:, features].cpu().numpy())
+            observed.append(mask[:, features].cpu().numpy())
+            labels.append(classes.cpu().numpy())
         real, observed, labels = np.concatenate(real), np.concatenate(observed), np.concatenate(labels)
 
         def generate(classes):
@@ -302,8 +304,10 @@ def train_candidate(matrix, retained_rows, medians, labels, class_names,
         generated_all = generate(labels)
         generated = generated_all[:, old_positions]
         generated_rep = selection_reference["pca"].transform(generated_all[:, scoring_positions])
+        # 样本不足时保持局部邻域，避免把整个内部验证集合纳入每个细胞的近邻。
+        selection_neighbors = 30 if 2 * len(labels) > 30 else max(1, len(labels) - 1)
         validation_milisi, _, _ = milisi(selection_reference["validation_rep"], labels,
-                                         generated_rep, labels, n_neighbors=30)
+                                         generated_rep, labels, n_neighbors=selection_neighbors)
         permuted_labels = np.random.default_rng(SEED).permutation(labels)
         permuted = generate(permuted_labels)[:, old_positions]
         counts = observed.sum(0)
@@ -338,7 +342,8 @@ def train_candidate(matrix, retained_rows, medians, labels, class_names,
         return {
             **representation,
             "selection_milisi": float(validation_milisi),
-            **source_neighborhoods(selection_reference["validation_rep"], generated_rep),
+            "selection_neighbors": selection_neighbors,
+            **source_neighborhoods(selection_reference["validation_rep"], generated_rep, k=selection_neighbors),
             "selection_reconstruction": validation["reconstruction"],
             "selection_kl": validation["kl"], "selection_diffusion": validation["diffusion"],
             "selection_mean_error": mean_error, "selection_variance_error": variance_error,
@@ -481,7 +486,7 @@ def train_candidate(matrix, retained_rows, medians, labels, class_names,
             "sampling_steps": DDIM_SAMPLING_STEPS, "diffusion_schedule": DIFFUSION_SCHEDULE,
             "diffusion_prediction": DIFFUSION_PREDICTION, "diffusion_loss_weight": DIFFUSION_LOSS_WEIGHT,
             "training_stages": ["vae_pretrain", "diffusion_warmup"] + ([] if frozen_vae else ["joint"]),
-            "frozen_vae": frozen_vae, "selection_metric": "内部验证真实标签 30-NN miLISI",
+            "frozen_vae": frozen_vae, "selection_metric": f"内部验证真实标签 {selection['selection_neighbors']}-NN miLISI",
             "vae_state_before_diffusion": vae_before, "vae_state_after_training": vae_after,
             "latent_normalization": "预训练后由内部训练后验拟合并固定",
             "class_names": class_names.tolist(), "seed": SEED, "beta_target": beta_target,

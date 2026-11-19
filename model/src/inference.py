@@ -11,10 +11,11 @@ from data.training import _dense_float32
 
 
 from data.paths import OUTPUTS, check_output, require_environment
+from model.src.config import TrainingConfig
 from model.src.generation import write_synthetic_h5ad, validate_synthetic_h5ad
 from model.src.postprocessing import write_training_mask_h5ad, apply_joint_mapping, feature_axis_hash, write_json
 
-def run_inference(trained_run, training_path, target_obs_path, output_dir, seed=42, device=None):
+def run_inference(trained_run, training_path, target_obs_path, output_dir, seed=42, device=None, *, sampling_steps=None):
     trained_run, training_path, target_obs_path, output_dir = map(Path, (trained_run, training_path, target_obs_path, output_dir))
     device = torch.device(device or ('cuda' if torch.cuda.is_available() else 'cpu'))
     torch.set_num_threads(8)
@@ -27,6 +28,10 @@ def run_inference(trained_run, training_path, target_obs_path, output_dir, seed=
     training_report = json.loads((trained_run / "completed.json").read_text(encoding="utf-8"))
     cache_run = Path(training_report.get("训练缓存目录", str(trained_run)))
     model, checkpoint = load_cvae_model(model_root / "model.pt", device)
+    if sampling_steps is None:
+        sampling_steps = min(TrainingConfig.DDIM_SAMPLING_STEPS, model.diffusion_timesteps)
+    elif not 1 <= sampling_steps <= model.diffusion_timesteps:
+        raise ValueError("DDIM 采样步数必须位于扩散日程范围内")
     training = ad.read_h5ad(training_path, backed="r")
     matrix = None
     try:
@@ -51,14 +56,15 @@ def run_inference(trained_run, training_path, target_obs_path, output_dir, seed=
         output_dir.mkdir(parents=True, exist_ok=True)
         raw_path, masked_path = output_dir / "raw.h5ad", output_dir / "masked.h5ad"
         write_synthetic_h5ad(raw_path, model, indices, labels, training.var, names,
-            checkpoint["sampling_steps"], device, seed)
+            sampling_steps, device, seed)
         validate_synthetic_h5ad(raw_path, names, len(labels))
         write_training_mask_h5ad(raw_path, masked_path, matrix,
             training.obs["Subclass"].astype(str).to_numpy(), fit_rows, seed)
         apply_joint_mapping(masked_path, output_dir / "data.h5ad", model_root / "alignment")
         write_json(output_dir / "run_summary.json", {"状态": "完成", "方法": "simscDNAm",
             "训练目录": str(trained_run), "目标配额来源": str(target_obs_path),
-            "生成细胞数": len(labels), "数据": str(output_dir / "data.h5ad"), "种子": seed})
+            "生成细胞数": len(labels), "数据": str(output_dir / "data.h5ad"), "种子": seed,
+            "DDIM采样步数": sampling_steps})
         print("推理完成：", output_dir / "data.h5ad")
     finally:
         training.file.close()
@@ -77,10 +83,12 @@ def main(argv=None):
     parser.add_argument('--target', type=Path, help='只提供目标 Subclass 配额的 H5AD')
     parser.add_argument('--output', type=Path, help='新的独立推理输出目录')
     parser.add_argument('--seed', type=int, default=42, help='随机种子')
+    parser.add_argument('--sampling-steps', type=int, help=f'DDIM 采样步数，默认 {TrainingConfig.DDIM_SAMPLING_STEPS}')
     parser.add_argument('--device', help='计算设备，例如 cuda:0 或 cpu')
     args = parser.parse_args(argv)
     require_environment()
     prepared = OUTPUTS / 'preprocessing' / args.dataset
     run_inference(args.trained_run or OUTPUTS / 'model' / args.dataset,
         args.training or prepared / 'TrainingReal.h5ad', args.target or prepared / 'HeldoutReal.h5ad',
-        args.output or OUTPUTS / 'inference' / args.dataset / 'simscDNAm', args.seed, args.device)
+        args.output or OUTPUTS / 'inference' / args.dataset / 'simscDNAm', args.seed, args.device,
+        sampling_steps=args.sampling_steps)

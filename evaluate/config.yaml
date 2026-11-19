@@ -6,7 +6,8 @@ synthetic_h5ad:
   FittedMarginal: ../outputs/baseline/liu2023/full/FittedMarginal/data.h5ad
   simATAC: ../outputs/baseline/liu2023/full/simATAC/data.h5ad
   simCAS: ../outputs/baseline/liu2023/full/simCAS/data.h5ad
-  STADiffuser: ../outputs/baseline/liu2023/full/STADiffuser/data.h5ad
+  PeakVI: ../outputs/baseline/liu2023/full/PeakVI/data.h5ad
+  DiTSim: ../outputs/baseline/liu2023/full/DiTSim/data.h5ad
 region_pairs_csv: ../outputs/preprocessing/liu2023/full/region_pairs.csv
 output_dir: ../outputs/evaluate/liu2023/full
 a1_regions_csv: A1/marker_regions_liu2023.csv

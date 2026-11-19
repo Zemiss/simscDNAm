@@ -6,7 +6,8 @@ synthetic_h5ad:
   FittedMarginal: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/FittedMarginal/data.h5ad
   simATAC: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/simATAC/data.h5ad
   simCAS: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/simCAS/data.h5ad
-  STADiffuser: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/STADiffuser/data.h5ad
+  PeakVI: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/PeakVI/data.h5ad
+  DiTSim: /home/sccasimp/data/xb/outputs/simscDNAm/baseline/liu2023/full/DiTSim/data.h5ad
 region_pairs_csv: /home/sccasimp/data/xb/outputs/simscDNAm/preprocessing/liu2023/full/region_pairs.csv
 output_dir: /home/sccasimp/data/xb/outputs/simscDNAm/evaluate/liu2023/full
 a1_regions_csv: A1/marker_regions_liu2023.csv

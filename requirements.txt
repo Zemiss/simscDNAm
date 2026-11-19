@@ -9,3 +9,7 @@ matplotlib
 umap-learn
 PyYAML
 threadpoolctl
+nbformat
+nbclient
+ipykernel
+pypdf

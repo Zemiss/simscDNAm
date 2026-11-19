@@ -14,7 +14,7 @@ class TrainingConfig:
     HIDDEN_DIM: int = 256
     DENOISER_BLOCKS: int = 3
     DIFFUSION_TIMESTEPS: int = 1000
-    DDIM_SAMPLING_STEPS: int = 50
+    DDIM_SAMPLING_STEPS: int = 10
     DIFFUSION_LOSS_WEIGHT: float = 0.05
     DIFFUSION_PREDICTION: str = 'v'
     DIFFUSION_SCHEDULE: str = 'cosine'

@@ -9,7 +9,7 @@
 | `data/` | [prepare.py](data/prepare.py)：共用质控、训练／留出划分和训练前复制区域；`training.py`、`evaluation.py`、`baseline.py` 实现数据读取与预处理 |
 | `model/src/` | 模型架构、训练、生成、缺失掩码、联合秩映射和完整流程 |
 | `model/script/` | [train.py](model/script/train.py)、[inference.py](model/script/inference.py)：训练和独立推理命令行入口 |
-| `baseline/` | FittedMarginal、simATAC、simCAS、STADiffuser 各目录的 `inference.py` |
+| `baseline/` | FittedMarginal、simATAC、simCAS、PeakVI、DiTSim 各目录的 `inference.py` |
 | `evaluate/A1/` | [evaluate.py](evaluate/A1/evaluate.py)：边缘分布指标及两类分布图 |
 | `evaluate/A2/` | [evaluate.py](evaluate/A2/evaluate.py)：复制区域相关性及小提琴／柱状图 |
 | `evaluate/A3/` | [evaluate.py](evaluate/A3/evaluate.py)：ANOVA、PCA、30近邻 miLISI 及联合 UMAP |
@@ -29,7 +29,8 @@ python -m model.script.train --dataset liu2023/full
 python -m baseline.FittedMarginal.inference --dataset liu2023/full
 python -m baseline.simATAC.inference --dataset liu2023/full
 python -m baseline.simCAS.inference --dataset liu2023/full
-python -m baseline.STADiffuser.inference --dataset liu2023/full --device cuda:0
+python -m baseline.PeakVI.inference --dataset liu2023/full --device cuda:0
+python -m baseline.DiTSim.inference --dataset liu2023/full --device cuda:0
 
 python -m evaluate.A1.evaluate --config evaluate/config.yaml
 python -m evaluate.A2.evaluate --config evaluate/config.yaml
@@ -41,7 +42,7 @@ python -m evaluate.A3.evaluate --config evaluate/config.yaml
 3. 已有完整训练目录时，运行 `python -m model.script.inference --trained-run 训练目录 --training 原训练.h5ad --target 目标.h5ad --output 新输出目录`。使用 `--device cpu` 或 `--device cuda:0` 选择设备。
 4. 在 [evaluate/config.yaml](evaluate/config.yaml) 中只填写本轮已生成的方法。服务器使用 [config.server.yaml](evaluate/config.server.yaml)。三个评估命令独立运行并保存各自的指标和图。
 
-也可直接运行文件，例如 `python model/script/train.py --help`；从其他工作目录直接运行时使用文件的绝对路径。导入模块不会开始训练、下载官方模型或读写实验数据。正式运行不需要 Jupyter 或 IPython。
+也可直接运行文件，例如 `python model/script/train.py --help`；从其他工作目录直接运行时使用文件的绝对路径。导入模块不会开始训练、下载官方模型或读写实验数据。PeakVI 和 DiTSim 的 Python 入口通过 nbclient 执行 Notebook，训练函数位于 Notebook 内；需注册当前 simscDNAm 内核。
 
 ## 数据与输出
 
@@ -57,8 +58,12 @@ python -m evaluate.A3.evaluate --config evaluate/config.yaml
 | A2 | 实际生成的 1000 对原始／复制区域 Pearson；另存自然区域 Spearman 辅助统计 |
 | A3 | 真实训练参照 ANOVA 选最多 50000 个自然区域、PCA 最多 50 维、30近邻 miLISI；按类型中位数等权平均 |
 
-A1/A3 排除末尾 1000 个复制区域，合成矩阵不截断，A2 不在生成后重建复制列。图中文字使用英文。
+A1/A3 排除末尾 1000 个复制区域，A2 不在生成后重建复制列。PeakVI、DiTSim 使用训练中位数填补后的输入，输出裁剪到 0–1。图中文字使用英文。
 
 联合秩映射只使用内部 fit 真实值，但会改变原生成排序与几何，高复制相关不能单独证明原始 VAE 学到了依赖结构。simATAC、simCAS 保留原生计数或分数，可能超出 0–1；当前比较存在数值域差异。多轮查看的留出结果属于探索性验证。
 
-既有结果：[全量及子集比较](outputs/reports/knn30_20261117/README.md)、[STADiffuser 五方法比较](outputs/reports/stadiffuser_20261111/README.md)。本轮迁移运行方式，未重新训练这些正式结果。
+十组主实验均以真实训练集的 Subclass 频数为准，将训练细胞少于 10 个的类别从该组训练和测试中同时移除。所有模型重跑，生成细胞数和逐类配额与过滤后的测试集一致。A3 选区和 PCA 从过滤后的真实训练集重新拟合。运行顺序为[过滤数据](notebooks/训练Subclass最少10.ipynb)、用过滤输入运行各模型、[评分与发布](notebooks/过滤后评分与发布.ipynb)。全量消融使用本轮训练模型，见[消融评分](notebooks/过滤后全量消融.ipynb)和[消融图](notebooks/过滤后消融图.ipynb)。接口说明见[基线说明](baseline/README.md)。
+
+[结果 README](outputs/README.md)固定交付 10 张主实验表、4 幅 Liu2023 全量图、1 张后处理消融表和 2 幅消融图。消融图分别为 UMAP 与边缘对齐。每次更新评分 CSV 后，执行 [更新结果 README](notebooks/更新结果README.ipynb) 同步表格数值和最优值标注。
+
+内部选模默认使用 30 近邻。内部验证的真实与合成细胞合计不足 31 个时，近邻数改为真实验证细胞数减 1，最低为 1。正式测试的 A3 仍使用 30 近邻。
